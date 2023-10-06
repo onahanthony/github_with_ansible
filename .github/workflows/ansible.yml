@@ -1,0 +1,33 @@
+name: Ansible EC2 Configuration
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  configure-ec2:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install Ansible
+      run: |
+        pip install ansible
+        ansible --version
+
+    - name: Configure EC2 instance using Ansible
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: us-east-1 # Change to your desired region
+        PRIVATE_KEY_PATH: ${{ secrets.PRIVATE_KEY_PATH }}
+      run: |
+        ansible-playbook -i inventory --private-key=$PRIVATE_KEY_PATH main.yaml
