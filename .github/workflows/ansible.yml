@@ -30,4 +30,4 @@ jobs:
         AWS_REGION: us-east-1 # Change to your desired region
         PRIVATE_KEY_PATH: ${{ secrets.PRIVATE_KEY_PATH }}
       run: |
-        ansible-playbook -i inventory --private-key=$PRIVATE_KEY_PATH main.yaml
+        ansible-playbook -i inventory --private-key ${PRIVATE_KEY_PATH} main.yaml
