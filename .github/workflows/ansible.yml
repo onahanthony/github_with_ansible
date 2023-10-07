@@ -29,4 +29,3 @@ jobs:
         playbook: main.yaml
         directory: ./
         key: ${{secrets.PRIVATE_KEY_PATH}}
-        inventory: inventory
