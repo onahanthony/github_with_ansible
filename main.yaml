@@ -2,8 +2,6 @@
 - hosts: all
   become: true
   remote_user: ubuntu 
-  vars:
-    ansible_ssh_private_key_file: "{{ secrets.PRIVATE_KEY_PATH }}"
   tasks:
   - name: install apache2
     apt:
