@@ -23,12 +23,12 @@ jobs:
         pip install ansible
         ansible --version
 
-    - name: Configure EC2 instance using Ansible
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: us-east-1 # Change to your desired region
-        PRIVATE_KEY_PATH: ${{ secrets.PRIVATE_KEY_PATH }}
-      run: |
-        set -x
-        ansible-playbook -i inventory main.yaml --private-key=$PRIVATE_KEY_PATH
+    - name: Run playbook
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: main.yaml
+        directory: ./
+        key: ${{secrets.PRIVATE_KEY_PATH}}
+        inventory: |
+          [all]
+          52.90.19.248
