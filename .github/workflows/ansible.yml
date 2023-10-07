@@ -29,6 +29,4 @@ jobs:
         playbook: main.yaml
         directory: ./
         key: ${{secrets.PRIVATE_KEY_PATH}}
-        inventory: |
-          [all]
-          52.90.19.248
+        inventory: inventory
