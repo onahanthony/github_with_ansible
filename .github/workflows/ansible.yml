@@ -28,5 +28,7 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: us-east-1 # Change to your desired region
+        PRIVATE_KEY_PATH: ${{ secrets.PRIVATE_KEY_PATH }}
       run: |
-        ansible-playbook -i inventory  main.yaml
+        set -x
+        ansible-playbook -i inventory main.yaml --private-key=$PRIVATE_KEY_PATH
